@@ -10,45 +10,103 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
-
-SRCS =	srcs/main.c				\
-		srcs/philo_create.c		\
-		srcs/utils.c			\
+NAME 		=	philo
+SRCS 		=	srcs/main.c				\
+			srcs/philo_create.c			\
+			srcs/utils.c				\
 		
+OBJS		=		$(SRCS:.c=.o)
+INCLUDE		= 		includes
+AR		=		#ar rcs
+RM		=		rm -f
+CC		=		gcc
+CFLAGS		=		-Wall -Wextra -Werror -g -pthread
 
-OBJS := ${SRCS:.c=.o}
+%.o:				%.c
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
 
-CC = gcc
+all:	$(NAME)
 
-RM = rm -f
+$(NAME):		$(OBJS)
+	@clear
+	@echo "\033[1;34m                                                                                                                     "
+	@echo "#######                                                  ###                                                   "       
+	@echo "#       #    #   ##   #    #  ####    ##   #      ###### ###  ####     #####  #####   ####       # ######  ####  ##### "
+	@echo "#       ##  ##  #  #  #    # #    #  #  #  #      #       #  #         #    # #    # #    #      # #      #    #   #   "
+	@echo "#####   # ## # #    # #    # #      #    # #      #####  #    ####     #    # #    # #    #      # #####  #        #   "
+	@echo "#       #    # ###### #    # #  ### ###### #      #               #    #####  #####  #    #      # #      #        #   "
+	@echo "#       #    # #    # #    # #    # #    # #      #          #    #    #      #   #  #    # #    # #      #    #   #   "
+	@echo "####### #    # #    #  ####   ####  #    # ###### ######      ####     #      #    #  ####   ####  ######  ####    #   "
+	@echo "									"
+	@echo "Project name : $(NAME)"
+	@echo "\n\033[1;32mCompilation en cours... ⌛\033[0;m\n"
+#	$(AR) $(NAME) $(OBJS)
+	@$(CC) -o $(NAME) $(OBJS)
+	@make wait
+	@make norm
+	@echo "Bonne correction!"	
 
-INC_DIR = include
 
-CFLAGS =  -Wall -Wextra -Werror -g -pthread 
-
-.c.o:
-	${CC} ${CFLAGS} -c -I ${INC_DIR} $< -o ${<:.c=.o}
-
-all: $(NAME)
-	@echo "\033[1;34m Bonne correction !\n"
-
-$(NAME): ${OBJS}
-	gcc -o $(NAME) ${OBJS}
-clean: 
-	@${RM} ${OBJS} 
+norm:
+	@echo "⚠️ \033[5;1;34m Checking The Norm \033[m⚠️" 
+	@if norminette $(SRCS) >/dev/null; then\
+        echo "\033[1;32m    Norminette : OK\033[m";\
+    else\
+        echo "\033[1;31m    Norminette : Error\033[m";\
+    fi
+clean:
+	@$(RM) $(OBJS)
 	@echo "\033[1;31m ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣶⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
 	@echo "⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⣄⣀⡀⣠⣾⡇⠀⠀⠀⠀"
 	@echo "⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀"
 	@echo "⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⢿⣿⣿⡇⠀⠀⠀⠀"
 	@echo "⠀⣶⣿⣦⣜⣿⣿⣿⡟⠻⣿⣿⣿⣿⣿⣿⣿⡿⢿⡏⣴⣺⣦⣙⣿⣷⣄⠀⠀⠀\033[1;34m Goodbye everyone\033[1;31m"
 	@echo "⠀⣯⡇⣻⣿⣿⣿⣿⣷⣾⣿⣬⣥⣭⣽⣿⣿⣧⣼⡇⣯⣇⣹⣿⣿⣿⣿⣧⠀⠀"
-	@echo "⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣷⠀"
-	@echo "\033[1;32m Objects have been deleted"
-fclean: clean
-	@${RM} $(NAME) 
-	@echo " ${NAME} have been deleted"
+	@echo "⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣷⠀\033[m"
+	@echo "\033[1;1;32m♻️  Objects have been \033[5;1;31mdeleted\033[m ♻️"
 
-re: fclean all
+fclean:
+	@$(RM) $(OBJS)
+	@$(RM) $(NAME)
+	@echo -n "\033[0;31m⠀"
+	@echo "UNINSTALLING LEAGUE OF LEGENDS"
+	@echo "[##############]"
+	@echo "　╭━╮╭━╮ ╭╮ ╱ "　　
+	@echo "　╰━┫╰━┫ ╰╯╱ ╭╮ "　　
+	@echo "　╰━╯╰━╯　╱　╰╯" 　　　　　
+	@echo "　     COMPLETE"
+	@echo "\033[1;1;32m♻️  Objects and $(NAME) have been \033[5;1;31mdeleted\033[m ♻️"
+
+wait:
+	@echo -n "\r  5%  [\033[0;31m█\033[m.........................]"
+	@sleep 0.1
+	@echo -n "\r 10%  [\033[0;31m███\033[m.......................]"
+	@sleep 0.1
+	@echo -n "\r 15%  [\033[0;31m████\033[m......................]"
+	@sleep 0.1
+	@echo -n "\r 20%  [\033[0;31m██████\033[m....................]"
+	@sleep 0.1
+	@echo -n "\r 27%  [\033[0;31m████████\033[m..................]"
+	@sleep 0.1
+	@echo -n "\r 32%  [\033[0;31m██████████\033[m................]"
+	@sleep 0.1
+	@echo -n "\r 35%  [\033[0;31m███████████\033[m...............]"
+	@sleep 0.1
+	@echo -n "\r 45%  [\033[0;31m█████████████\033[m.............]"
+	@sleep 0.1
+	@echo -n "\r 50%  [\033[0;31m███████████████\033[m...........]"
+	@sleep 0.1
+	@echo -n "\r 65%  [\033[0;31m██████████████████\033[m........]"
+	@sleep 0.1
+	@echo -n "\r 80%  [\033[0;31m█████████████████████\033[m.....]"
+	@sleep 0.1
+	@echo -n "\r 90%  [\033[0;31m████████████████████████\033[m..]"
+	@sleep 0.1
+	@echo -n "\r 95%  [\033[0;31m█████████████████████████\033[m.]"
+	@sleep 0.1
+	@echo -n "\r 99%  [\033[0;31m██████████████████████████\033[m]"
+	@sleep 1
+	@echo -n "\r 100% [\033[0;32m██████████████████████████\033[m]\033[0;32m compilation terminee ✓\n\033[0;m"
+re:		fclean all
 
 .PHONY: all clean fclean re
