@@ -6,9 +6,11 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:20:38 by emaugale          #+#    #+#             */
-/*   Updated: 2021/12/29 04:15:37 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/01/29 06:17:41 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 int	ft_atoi(const char *str)
 {

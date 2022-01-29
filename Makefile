@@ -11,10 +11,11 @@
 # **************************************************************************** #
 
 NAME 		=	philo
-SRCS 		=	srcs/main.c				\
-			srcs/philo_create.c			\
-			srcs/utils.c				\
-		
+SRCS 		=	srcs/init/init_philo.c				\
+				srcs/exec/execute_philo.c			\
+				srcs/main.c							\
+				srcs/utils.c						\
+						
 OBJS		=		$(SRCS:.c=.o)
 INCLUDE		= 		includes
 AR		=		#ar rcs
