@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 03:03:51 by emaugale          #+#    #+#             */
-/*   Updated: 2022/01/29 04:01:34 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/01/29 15:40:27 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void    execute_philo(t_philo *philo)
 {
+    
     (void)philo; 
 }

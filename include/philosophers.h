@@ -22,6 +22,7 @@
 # include <pthread.h>
 # include <sys/wait.h>
 # include <sys/types.h>
+# include <stdbool.h>
 
 # define DEAD 0
 # define ALIVE 1
@@ -46,22 +47,21 @@ typedef struct s_info
 
 typedef struct s_philo
 {
-	int		id;
-	int		laps;
-	int		finish;
-	int		die;
-	int		eat;
-	int		sleep;
-	time_t	last_meal;
-	t_info	*info;
-	struct s_philo	*next;
+	int				id;
+	int				laps;
+	int				finish;
+	int				die;
+	int				eat;
+	int				sleep;
+	time_t			last_meal;
+	t_info			*info;
 }			t_philo;
 
 
 /*				Prototypes			*/
 
-t_philo	*init(char **argv);
-t_philo	*init_loop(char **argv);
+t_philo	*init(char **argv, t_info *info);
+t_philo	*init_loop(char **argv,t_info *info);
 void	execute_philo(t_philo *philo);
 /*			Prototypes utils		*/
 
