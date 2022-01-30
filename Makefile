@@ -15,6 +15,7 @@ SRCS 		=	srcs/init/init_philo.c				\
 				srcs/exec/execute_philo.c			\
 				srcs/main.c							\
 				srcs/utils.c						\
+				srcs/routine/print_routine.c		\
 						
 OBJS		=		$(SRCS:.c=.o)
 INCLUDE		= 		includes

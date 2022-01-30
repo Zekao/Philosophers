@@ -16,11 +16,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <time.h>
+# include <sys/time.h>
 # include <limits.h>
 # include <stddef.h>
 # include <pthread.h>
-# include <sys/wait.h>
 # include <sys/types.h>
 # include <stdbool.h>
 
@@ -63,6 +62,7 @@ typedef struct s_philo
 t_philo	*init(char **argv, t_info *info);
 t_philo	*init_loop(char **argv,t_info *info);
 void	execute_philo(t_philo *philo);
+void	print_routine(t_philo *philo);
 /*			Prototypes utils		*/
 
 int	ft_atoi(const char *str);

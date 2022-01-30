@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 03:03:51 by emaugale          #+#    #+#             */
-/*   Updated: 2022/01/29 15:40:27 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/01/30 02:16:40 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 void    execute_philo(t_philo *philo)
 {
-    
-    (void)philo; 
+	print_routine(philo);
+	(void)philo; 
 }
+
+// int main() 
+// {
+//   gettimeofday(&current_time, NULL);
+//   printf("seconds : %ld\nmicro seconds : %ld",
+// 	current_time.tv_sec, current_time.tv_usec);
+
+//   return 0;
+// }
