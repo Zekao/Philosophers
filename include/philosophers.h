@@ -34,12 +34,15 @@ typedef pthread_mutex_t t_mutex;
 
 typedef struct s_info
 {
-	int		nbr;
-	int		time_start;
-	int		die;
-	int		eat;
-	int		sleep;
-	int		status;
+	int			nbr_philo;
+	int			nbr;
+	long long	time_start;
+	int			finish;
+	int			die;
+	int			eat;
+	int			sleep;
+	int			status;
+	t_mutex		*forks;
 }				t_info;
 
 /*				Struct of the philo			*/
@@ -47,12 +50,13 @@ typedef struct s_info
 typedef struct s_philo
 {
 	int				id;
+	pthread_t		t_id;
+	int				left_fork;
+	int				right_fork;
 	int				laps;
-	int				finish;
-	int				die;
-	int				eat;
-	int				sleep;
-	time_t			last_meal;
+	int				laps_done;
+	long long int	last_meal;
+	long long int	last_sleep;
 	t_info			*info;
 }			t_philo;
 
@@ -63,6 +67,12 @@ t_philo	*init(char **argv, t_info *info);
 t_philo	*init_loop(char **argv,t_info *info);
 void	execute_philo(t_philo *philo);
 void	print_routine(t_philo *philo);
+// void	eating(t_philo	*philo, t_info *info);
+// void	thinking(t_philo *philo);
+// void	sleeping(t_philo *philo);
+// void	*routine(void	*philo_data);
+long long int	timestamp(void);
+
 /*			Prototypes utils		*/
 
 int	ft_atoi(const char *str);

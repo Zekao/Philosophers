@@ -1,6 +1,7 @@
 {
 	"C_Cpp.errorSquiggles": "Disabled",
 	"files.associations": {
-		"types.h": "c"
+		"types.h": "c",
+		"philosophers.h": "c"
 	}
 }

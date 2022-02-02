@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 03:05:33 by emaugale          #+#    #+#             */
-/*   Updated: 2022/01/30 02:03:49 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/02 23:23:29 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	ft_info(t_info * info, char **argv)
 {
+	info->nbr_philo = ft_atoi(argv[0]);
 	info->die = ft_atoi(argv[1]);
 	info->eat = ft_atoi(argv[2]);
 	info->sleep = ft_atoi(argv[3]);
+	info->finish = 0;
+
 }
 
 t_philo *init(char **argv, t_info *info)
@@ -33,6 +36,9 @@ t_philo *init(char **argv, t_info *info)
 		philo[i].info = info;
 		philo[i].id = i;
 		philo[i].laps = -1;
+		philo[i].laps_done = 0;
+		philo[i].left_fork = i;
+		philo[i].right_fork = (i + 1) % ft_atoi(argv[0]);
 	}
 	return (philo);
 }
@@ -57,7 +63,10 @@ t_philo	*init_loop(char **argv, t_info *info)
 	{
 		philo[i].info = info;
 		philo[i].id = i;
+		philo[i].laps_done = 0;
 		philo[i].laps = ft_atoi(argv[4]);
+		philo[i].left_fork = i;
+		philo[i].right_fork = (i + 1) % ft_atoi(argv[0]);
 
 	}
 	printf("number of philo : %d\n", i);
