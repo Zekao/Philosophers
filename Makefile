@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME 		=	philo
+
 SRCS 		=	srcs/init/init_philo.c				\
 				srcs/main.c							\
 				srcs/init/init_mutex.c					\
@@ -22,8 +23,8 @@ OBJS		=		$(SRCS:.c=.o)
 INCLUDE		= 		include
 AR		=		#ar rcs
 RM		=		rm -f
-CC		=		gcc
-CFLAGS		=		-Wall -Wextra -Werror -pthread -g
+CC		=		clang
+CFLAGS		=	-Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
 
 %.o:				%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
@@ -43,8 +44,7 @@ $(NAME):		$(OBJS)
 	@echo "									"
 	@echo "Project name : $(NAME)"
 	@echo "\n\033[1;32mCompilation en cours... ⌛\033[0;m\n"
-#	$(AR) $(NAME) $(OBJS)
-	@$(CC) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@make wait
 	@make norm
 	@echo "Bonne correction!"	
