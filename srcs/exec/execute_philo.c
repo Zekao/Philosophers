@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 03:03:51 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/03 08:51:17 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:47:42 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,23 @@ void	sleeping(t_philo *philo)
 }
 void	*routine(void	*philo_data)
 {
-	t_philo philo;
-	t_info	info;
+	t_philo *philo;
+	t_info	*info;
 	
-	philo = *(t_philo*)philo_data;
-	init_mutex(&philo);
-	info = *(t_info*)philo.info;
-	while (info.die)
+	philo = (t_philo*)philo_data;
+	init_mutex(philo);
+	info = (t_info*)philo->info;
+	while (philo->info->done != true)
 	{
-		if (philo.laps_done == philo.laps)
+		if (philo->laps_done == philo->laps)
 		{
-			printf("All loops have been done.\n");
-			exit (0);
+			printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa %d/%d\n", philo->laps_done, philo->laps);
+			philo->info->done = true;
+			return (NULL);
 		}
-		eating(&philo, &info);
-		sleeping(&philo);
-		thinking(&philo);
+		eating(philo, info);
+		sleeping(philo);
+		thinking(philo);
 	}
 	return (NULL);
 }
@@ -87,7 +88,7 @@ void    execute_philo(t_philo *philo)
 		}
 	}
 	i = -1;
-	while (++i < philo->id)
+	while (++i < philo->info->nbr_philo)
 	{
 		pthread_join(philo[i].t_id, NULL);
 	}

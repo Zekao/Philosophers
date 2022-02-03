@@ -42,6 +42,7 @@ typedef struct s_info
 	int			eat;
 	int			sleep;
 	int			status;
+	int			done;
 	t_mutex		*forks;
 }				t_info;
 

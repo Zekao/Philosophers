@@ -24,7 +24,7 @@ INCLUDE		= 		include
 AR		=		#ar rcs
 RM		=		rm -f
 CC		=		clang
-CFLAGS		=	-Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror -pthread #-g3 -fsanitize=thread
 
 %.o:				%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)

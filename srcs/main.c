@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 17:50:57 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/03 08:52:06 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:36:50 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ int	main(int argc, char **argv)
 	while(1)
 	{
 		execute_philo(philo);
+		printf("value of laps done : %d\n", philo->laps_done);
+		if (philo->laps_done == philo->laps)
+			break ;
+		// if (philo->laps_done == philo->laps)
+			// break ;
 	}
 	printf("beep boop test2\n");
 }
