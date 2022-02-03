@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 03:03:51 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/03 08:40:02 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/03 08:51:17 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	eating(t_philo	*philo, t_info *info)
 void	thinking(t_philo *philo)
 {
 	printf("[%lu] philo[%d] is thinking\n", timestamp(), philo->id);
-	usleep(100 * 1000);
+	usleep(philo->info->die - philo->info->sleep - philo->info->eat * 1000);
 }
 
 void	sleeping(t_philo *philo)

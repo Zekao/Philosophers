@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 17:50:57 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/03 07:02:42 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/03 08:52:06 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,4 @@ int	main(int argc, char **argv)
 		execute_philo(philo);
 	}
 	printf("beep boop test2\n");
-	// exit(0);
 }

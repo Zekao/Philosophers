@@ -66,7 +66,6 @@ typedef struct s_philo
 t_philo	*init(char **argv, t_info *info);
 t_philo	*init_loop(char **argv,t_info *info);
 void	execute_philo(t_philo *philo);
-void	print_routine(t_philo *philo);
 void	init_mutex(t_philo *data);
 // void	eating(t_philo	*philo, t_info *info);
 // void	thinking(t_philo *philo);
