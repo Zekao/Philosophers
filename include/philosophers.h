@@ -53,7 +53,10 @@ typedef struct s_philo
 	int				id;
 	pthread_t		t_id;
 	int				left_fork;
+	int				increment_mutex;
 	int				right_fork;
+	int				aff_mutex;
+	int				timestamp;
 	int				laps;
 	int				laps_done;
 	long long int	last_meal;
@@ -64,8 +67,8 @@ typedef struct s_philo
 
 /*				Prototypes			*/
 
-t_philo	*init(char **argv, t_info *info);
-t_philo	*init_loop(char **argv,t_info *info);
+t_philo	*init(char **argv, t_info **info);
+t_philo	*init_loop(char **argv,t_info **info);
 void	execute_philo(t_philo *philo);
 void	init_mutex(t_philo *data);
 // void	eating(t_philo	*philo, t_info *info);
