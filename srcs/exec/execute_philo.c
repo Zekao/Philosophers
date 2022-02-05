@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 03:03:51 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/04 03:03:02 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/05 03:51:33 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,48 @@ void	ft_usleep(long unsigned int time_in_ms)
 
 void	eating(t_philo	*philo, t_info *info)
 {
-	t_mutex t1;
-	t_mutex t2;
+	int    temp_fork;
+	long unsigned int	t_start;
 
-	pthread_mutex_init(&t1, NULL);
-	pthread_mutex_init(&t2, NULL);
+	t_start = philo->info->time_start;
+    if (philo->left_fork > philo->right_fork)
+    {
+        temp_fork = philo->right_fork;
+        philo->right_fork = philo->left_fork;
+        philo->left_fork = temp_fork;
+    }
 	pthread_mutex_lock(&info->forks[(philo)->left_fork]);
-	printf("[%lu] philo[%d] is taking left fork\n", timestamp(), philo->id);
+	printf("[%lu] philo[%d] is taking left fork\n", timestamp() - t_start, philo->id);
 	pthread_mutex_lock(&info->forks[(philo)->right_fork]);
-	printf("[%lu] philo[%d] is taking right fork\n", timestamp(), philo->id);
-	printf("[%lu] philo[%d] is eating\n", timestamp(), philo->id);
+	printf("[%lu] philo[%d] is taking right fork\n", timestamp() - t_start, philo->id);
+	printf("[%lu] philo[%d] is eating\n", timestamp() - t_start, philo->id);
 	ft_usleep(info->eat);
 	pthread_mutex_unlock(&info->forks[(philo)->left_fork]);
 	pthread_mutex_unlock(&info->forks[(philo)->right_fork]);
-	pthread_mutex_lock(&t2);
+	pthread_mutex_lock(&info->aff);
 	philo->laps_done++;
-	pthread_mutex_unlock(&t2);
-	pthread_mutex_lock(&t1);
+	pthread_mutex_unlock(&info->aff);
+	pthread_mutex_lock(&info->aff);
 	philo->last_meal = timestamp();
-	pthread_mutex_unlock(&t1);
+	pthread_mutex_unlock(&info->aff);
 }
 
 void	thinking(t_philo *philo)
 {
-	printf("[%lu] philo[%d] is thinking\n", timestamp(), philo->id);
+	long unsigned int	t_start;
+
+	t_start = philo->info->time_start;
+	printf("[%lu] philo[%d] is thinking\n", timestamp() - t_start, philo->id);
 	ft_usleep(philo->info->die - philo->info->sleep - philo->info->eat);
 }
 
 void	sleeping(t_philo *philo)
 {
+	long unsigned int	t_start;
+
+	t_start = philo->info->time_start;
 	// pthread_mutex_lock(&philo->info->forks[(philo)->aff_mutex]);
-	printf("[%lu] philo[%d] is sleeping\n", timestamp(), philo->id);
+	printf("[%lu] philo[%d] is sleeping\n", timestamp() - t_start, philo->id);
 	// pthread_mutex_unlock(&philo->info->forks[(philo)->aff_mutex]);
 	ft_usleep(philo->info->sleep);
 }
@@ -108,10 +119,10 @@ void    execute_philo(t_philo *philo)
 			philo[i].last_meal = timestamp();
 		}
 	}
-	i = -1;
-	while (++i < philo->info->nbr_philo)
-	{
-		pthread_join(philo[i].t_id, NULL);
-	}
+	// i = -1;
+	// while (++i < philo->info->nbr_philo)
+	// {
+	// 	pthread_join(philo[i].t_id, NULL);
+	// }
 	
 }

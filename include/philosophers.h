@@ -44,6 +44,7 @@ typedef struct s_info
 	int			status;
 	int			done;
 	t_mutex		*forks;
+	t_mutex		aff;
 }				t_info;
 
 /*				Struct of the philo			*/

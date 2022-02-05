@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 03:05:33 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/04 02:39:46 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/05 04:07:16 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_info(t_info *info, char **argv)
 	info->eat = ft_atoi(argv[2]);
 	info->sleep = ft_atoi(argv[3]);
 	info->done = 2;
+	info->status = ALIVE;
 	info->finish = 0;
 
 }

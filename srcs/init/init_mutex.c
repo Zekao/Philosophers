@@ -25,4 +25,5 @@ void	init_mutex(t_philo *data)
 		if ((pthread_mutex_init(&data->info->forks[i], NULL)))
 			return ;
 	}
+	pthread_mutex_init(&data->info->aff, NULL);
 }
