@@ -6,7 +6,7 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 17:50:57 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/08 09:39:42 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:40:32 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	ft_check_args(char **argv)
 	int	i;
 
 	i = 0;
+	if (ft_atoi(argv[0]) == 0)
+		return (false);
 	while (argv[i])
 	{
 		if (ft_isnum(argv[i]) != 1)
