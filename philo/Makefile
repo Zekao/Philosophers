@@ -12,19 +12,21 @@
 
 NAME 		=	philo
 
-SRCS 		=	srcs/init/init_philo.c				\
-				srcs/main.c							\
-				srcs/init/init_mutex.c					\
-				srcs/routine/print_routine.c		\
-				srcs/utils.c						\
-				srcs/exec/execute_philo.c			\
-						
+SRCS 		=	srcs/actions.c			\
+				srcs/init.c				\
+				srcs/execute.c			\
+				srcs/utils.c			\
+				srcs/main.c				\
+				srcs/time.c				\
+				srcs/print.c			\
+				srcs/one_philo.c		\
+
 OBJS		=		$(SRCS:.c=.o)
 INCLUDE		= 		include
 AR		=		#ar rcs
 RM		=		rm -f
 CC		=		clang
-CFLAGS		=	-Wall -Wextra -Werror -pthread -g # -fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror -pthread -g #-fsanitize=thread
 
 %.o:				%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
@@ -34,7 +36,7 @@ all:	$(NAME)
 $(NAME):		$(OBJS)
 	@clear
 	@echo "\033[1;34m                                                                                                                     "
-	@echo "#######                                                  ###                                                   "       
+	@echo "#######                                                  ###                                                   "
 	@echo "#       #    #   ##   #    #  ####    ##   #      ###### ###  ####     #####  #####   ####       # ######  ####  ##### "
 	@echo "#       ##  ##  #  #  #    # #    #  #  #  #      #       #  #         #    # #    # #    #      # #      #    #   #   "
 	@echo "#####   # ## # #    # #    # #      #    # #      #####  #    ####     #    # #    # #    #      # #####  #        #   "
@@ -47,11 +49,11 @@ $(NAME):		$(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@make wait
 	@make norm
-	@echo "Bonne correction!"	
+	@echo "Bonne correction!"
 
 
 norm:
-	@echo "⚠️ \033[5;1;34m Checking The Norm \033[m⚠️" 
+	@echo "⚠️ \033[5;1;34m Checking The Norm \033[m⚠️"
 	@if norminette $(SRCS) >/dev/null; then\
         echo "\033[1;32m    Norminette : OK\033[m";\
     else\

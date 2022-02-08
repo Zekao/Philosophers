@@ -1,16 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philo.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 03:05:33 by emaugale          #+#    #+#             */
-/*   Updated: 2022/02/05 04:07:16 by emaugale         ###   ########.fr       */
+/*   Created: 2022/02/06 03:22:59 by emaugale          #+#    #+#             */
+/*   Updated: 2022/02/08 09:40:38 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../include/philosophers.h"
+
+int	init_mutex(t_philo *data)
+{
+	data->info->forks = malloc(sizeof(t_mutex));
+	if (!data->info->forks)
+		return (false);
+	data->info->lock = malloc(sizeof(t_mutex));
+	if (!data->info->lock)
+		return (false);
+	pthread_mutex_init(data->info->forks, NULL);
+	pthread_mutex_init(data->info->lock, NULL);
+	return (true);
+}
+
+void	destroy_mutex(t_philo	*data)
+{
+	free(data->info->forks);
+	free(data->info->lock);
+}
 
 void	ft_info(t_info *info, char **argv)
 {
@@ -18,13 +37,11 @@ void	ft_info(t_info *info, char **argv)
 	info->die = ft_atoi(argv[1]);
 	info->eat = ft_atoi(argv[2]);
 	info->sleep = ft_atoi(argv[3]);
-	info->done = 2;
 	info->status = ALIVE;
 	info->finish = 0;
-
 }
 
-t_philo *init(char **argv, t_info **info)
+t_philo	*init(char **argv, t_info **info)
 {
 	t_philo		*philo;
 	static int	i = -1;
@@ -39,25 +56,19 @@ t_philo *init(char **argv, t_info **info)
 		philo[i].id = i;
 		philo[i].laps = -1;
 		philo[i].laps_done = 0;
-		philo[i].left_fork = i;
-		philo[i].aff_mutex = 2;
-		philo[i].increment_mutex = 2;
-		philo[i].right_fork = (i + 1) % ft_atoi(argv[0]);
-		philo[i].timestamp = 0;
+		philo[i].last_meal = 0;
+		philo[i].status = ALIVE;
+		pthread_mutex_init(&philo[i].right_fork, NULL);
+		pthread_mutex_init(&philo[i].lock, NULL);
+		philo[(i + 1) % philo->info->nbr_philo].left_fork
+			= &philo[i].right_fork;
 	}
 	return (philo);
 }
 
-/*
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		if i have 5 args, i add a new info about the laps, if i have 4 args, i define laps to -1
-		-1 because it will be my value to said : ok there is no limit of laps given by the user
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-*/
-
 t_philo	*init_loop(char **argv, t_info **info)
 {
-	t_philo	*philo;
+	t_philo		*philo;
 	static int	i = -1;
 
 	ft_info(*info, argv);
@@ -69,14 +80,13 @@ t_philo	*init_loop(char **argv, t_info **info)
 		philo[i].info = *info;
 		philo[i].id = i;
 		philo[i].laps_done = 0;
+		philo[i].last_meal = 0;
 		philo[i].laps = ft_atoi(argv[4]);
-		philo[i].left_fork = i;
-		philo[i].right_fork = (i + 1) % ft_atoi(argv[0]);
-		philo[i].timestamp = 0;
-
+		pthread_mutex_init(&philo[i].lock, NULL);
+		pthread_mutex_init(&philo[i].right_fork, NULL);
+		philo[(i + 1) % philo->info->nbr_philo].left_fork
+			= &philo[i].right_fork;
+		philo[i].status = ALIVE;
 	}
-	printf("number of philo : %d\n", i);
 	return (philo);
 }
-
-

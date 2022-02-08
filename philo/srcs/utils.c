@@ -6,11 +6,11 @@
 /*   By: emaugale <emaugale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:20:38 by emaugale          #+#    #+#             */
-/*   Updated: 2022/01/29 06:17:41 by emaugale         ###   ########.fr       */
+/*   Updated: 2022/02/08 08:58:18 by emaugale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../include/philosophers.h"
 
 int	ft_atoi(const char *str)
 {
@@ -61,4 +61,26 @@ int	ft_isnum(char *str)
 			return (0);
 	}
 	return (1);
+}
+
+void	ft_error(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(2, &str[i], 1);
+		i++;
+	}
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
